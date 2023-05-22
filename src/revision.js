@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { resolveRef } from './refs.js'
 import { join as joinPath } from 'node:path'
-import { resolveObject } from './objects.js'
+import { resolveObject } from './objects/index.js'
 
 function resolveHEAD() {
     const HEAD = readFileSync('.git/HEAD', 'utf8')
