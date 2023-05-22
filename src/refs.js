@@ -1,13 +1,6 @@
 import { readFileSync } from 'node:fs'
-
-export function resolveHEAD() {
-    const HEAD = readFileSync('.git/HEAD', 'utf8')
-    if (HEAD.startsWith('ref: ')) {
-        return resolveRef(HEAD.substring(5).trim())
-    }
-    return HEAD.trim()
-}
+import { join as joinPath } from 'node:path'
 
 export function resolveRef(ref) {
-    return readFileSync(`.git/${ref}`, 'utf8').trim()
+    return readFileSync(joinPath('.git', ref), 'utf8').trim()
 }
