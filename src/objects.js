@@ -61,10 +61,14 @@ function parseTree(buffer) {
     return entries
 }
 
-export function resolveObject(hash) {
+export function resolveObjectRaw(hash) {
     const dir = hash.substring(0, 2)
     const file = hash.substring(2)
-    const objectContent = inflateSync(readFileSync(`.git/objects/${dir}/${file}`))
+    return inflateSync(readFileSync(`.git/objects/${dir}/${file}`))
+}
+
+export function resolveObject(hash) {
+    const objectContent = resolveObjectRaw(hash)
     const split = objectContent.indexOf(0)
     const objectHeader = objectContent.subarray(0, split).toString()
     const [objectType] = objectHeader.split(' ')
